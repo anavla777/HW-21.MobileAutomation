@@ -14,15 +14,20 @@ public class LastPage {
             doneButton = $(id("org.wikipedia.alpha:id/fragment_onboarding_done_button"));
 
     @Step("Check accessibility Get Started button on last page")
-    public void checkAccessibilityOfDoneButtonOnLastPage() {
+    public LastPage checkAccessibilityOfDoneButtonOnLastPage() {
         doneButton.shouldBe(visible);
         doneButton.shouldBe(clickable);
         doneButton.shouldHave(text("Get started"));
+        return this;
     }
 
     @Step("Check Text on PrimaryText label")
     public LastPage checkPrimaryTextOnLastPage() {
         primaryText.shouldHave(text("Data & Privacy"));
         return this;
+    }
+    @Step("Tap om Get Started")
+    public void navigateToMainPage() {
+        doneButton.click();
     }
 }
