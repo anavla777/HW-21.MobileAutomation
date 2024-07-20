@@ -39,13 +39,4 @@ public class TestBase {
         }
         closeWebDriver();
     }
-    @AfterAll
-    static void revertLocaleSettings(){
-        if (System.getProperty("deviceHost").equals("real")){
-
-
-        }
-
-
-    }
 }

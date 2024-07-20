@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static io.appium.java_client.AppiumBy.id;
 
-public class FourthPage {
+public class LastPage {
 
     private static final SelenideElement
             primaryText = $(id("org.wikipedia.alpha:id/primaryTextView")),
@@ -21,7 +21,7 @@ public class FourthPage {
     }
 
     @Step("Check Text on PrimaryText label")
-    public FourthPage checkPrimaryTextOnLastPage() {
+    public LastPage checkPrimaryTextOnLastPage() {
         primaryText.shouldHave(text("Data & Privacy"));
         return this;
     }

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.FirstPage;
-import pages.FourthPage;
+import pages.LastPage;
 import pages.SecondPage;
 import pages.ThirdPage;
 
@@ -18,7 +18,7 @@ public class WikipediaTests extends TestBase {
         FirstPage firstPage = new FirstPage();
         SecondPage secondPage = new SecondPage();
         ThirdPage thirdPage = new ThirdPage();
-        FourthPage fourthPage = new FourthPage();
+        LastPage fourthPage = new LastPage();
 
         firstPage.checkTextOnAddLanguageButton()
                 .checkSkipButtonOnFirstPage()
