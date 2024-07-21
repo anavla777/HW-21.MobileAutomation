@@ -29,5 +29,15 @@ public interface BrowserStackDriverConfig extends Config {
     @DefaultValue("Wikipedia app tests")
     String browserstackName();
 
+    String automationName();
+
+    String platformName();
+
+    String appLanguage();
+
+    String appLocale();
+
+    Boolean appFullReset();
+
     String browserstackUrl();
 }

@@ -26,6 +26,7 @@ public class LastPage {
         primaryText.shouldHave(text("Data & Privacy"));
         return this;
     }
+
     @Step("Tap om Get Started")
     public void navigateToMainPage() {
         doneButton.click();

@@ -17,8 +17,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
-import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 import static org.apache.commons.io.FileUtils.copyInputStreamToFile;
 
 public class LocalMobileDriver implements WebDriverProvider {
@@ -26,23 +24,6 @@ public class LocalMobileDriver implements WebDriverProvider {
             LocalMobileDriverConfig.class,
             System.getProperties()
     );
-
-    @Nonnull
-    @Override
-    public WebDriver createDriver(@Nonnull Capabilities capabilities) {
-        UiAutomator2Options options = new UiAutomator2Options();
-
-        options.setAutomationName(ANDROID_UIAUTOMATOR2)
-                .setPlatformName(ANDROID)
-                .setDeviceName(localMobileDriverConfig.deviceName())
-                .setApp(getAppPath())
-                .setAppPackage("org.wikipedia.alpha")
-                .setAppActivity("org.wikipedia.main.MainActivity")
-                .setLanguage("en")
-                .setLocale("US");
-
-        return new AndroidDriver(getAppiumServerUrl(), options);
-    }
 
     public static URL getAppiumServerUrl() {
         try {
@@ -52,10 +33,27 @@ public class LocalMobileDriver implements WebDriverProvider {
         }
     }
 
+    @Nonnull
+    @Override
+    public WebDriver createDriver(@Nonnull Capabilities capabilities) {
+        UiAutomator2Options options = new UiAutomator2Options();
+
+        options.setAutomationName(localMobileDriverConfig.automationName())
+                .setPlatformName(localMobileDriverConfig.platformName())
+                .setDeviceName(localMobileDriverConfig.deviceName())
+                .setFullReset(localMobileDriverConfig.appFullReset())
+                .setApp(getAppPath())
+                .setAppPackage(localMobileDriverConfig.appPackage())
+                .setAppActivity(localMobileDriverConfig.appActivity())
+                .setLanguage(localMobileDriverConfig.appLanguage())
+                .setLocale(localMobileDriverConfig.appLocale());
+
+        return new AndroidDriver(getAppiumServerUrl(), options);
+    }
+
     private String getAppPath() {
-        String appVersion = "app-alpha-universal-release.apk";
-        String appUrl = "https://github.com/wikimedia/apps-android-wikipedia" +
-                "/releases/download/latest/" + appVersion;
+        String appVersion = localMobileDriverConfig.appVersion();
+        String appUrl = localMobileDriverConfig.appUrl() + appVersion;
         String appPath = "src/test/resources/apps/" + appVersion;
 
         File app = new File(appPath);

@@ -14,9 +14,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
-import static io.appium.java_client.remote.MobilePlatform.ANDROID;
-
 
 public class BrowserStackMobileDriver implements WebDriverProvider {
 
@@ -29,12 +26,14 @@ public class BrowserStackMobileDriver implements WebDriverProvider {
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
         UiAutomator2Options options = new UiAutomator2Options();
-        options.setAutomationName(ANDROID_UIAUTOMATOR2)
-                .setPlatformName(ANDROID)
+        options.setAutomationName(config.automationName())
+                .setPlatformName(config.platformName())
                 .setPlatformVersion(config.browserstackPlatform())
                 .setDeviceName(config.browserstackDevice())
-                .setFullReset(false)
-                .setApp(config.browserstackApp());
+                .setFullReset(config.appFullReset())
+                .setApp(config.browserstackApp())
+                .setLanguage(config.appLanguage())
+                .setLocale(config.appLocale());
 
         try {
             return new AndroidDriver(new URI("https://" + authConfig.bsLogin() + ":" + authConfig.bsPassword()
